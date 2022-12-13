@@ -2,25 +2,24 @@
 #include <stdio.h>
 
 /**
-* main - Entry point
-*
-* Return: Always 0 (Success)
-*/
+ * main - Entry point print the first 50 fibonacci numbers
+ *
+ * Return: nothing
+ */
 
 int main(void)
 {
 int count;
-unsigned long x=0, y=1, z;
+unsigned long x, y, z;
+x = 0;
+y = 1;
 for (count = 1; count <= 49; count++)
 {
 z = x + y;
-printf("%lu", z);
-x = x;
-y = y;
-if ( count == 49)
-printf("\n");
-else
-printf(", ");
+x = y;
+y = z;
+printf("%lu, ", z);
 }
+printf("%lu\n", z + x);
 return (0);
 }
