@@ -7,7 +7,7 @@
 int main(void)
 {
 int count;
-unsigned long x = 0, y = 1 , z, a, b, c, d;
+unsigned long x = 0, y = 1, z, a, b, c, d;
 for (count = 1; count <= 90; count++)
 {
 z = x + y;
@@ -21,9 +21,9 @@ b = y % 1000;
 y = y / 1000;
 while (count <= 98)
 {
-carry = (a + b) / 1000;
-c = (a + b) - d * 1000;
-z = (x + y) + d;
+d = (a + b) / 1000;
+c = (a + b) -d * 1000;
+z = (x + y) +d;
 x = y;
 y = z;
 a = b;
