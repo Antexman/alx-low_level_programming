@@ -17,7 +17,7 @@ for (i = 0; i < 50; i++)
 t3 = t1 + t2;
 printf("%lu", t3);
 t1 = t2;
-t2 = t2;
+t2 = t3;
 if (i == 49)
 printf("\n");
 else
