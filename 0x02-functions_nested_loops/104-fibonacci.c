@@ -6,33 +6,42 @@
  */
 int main(void)
 {
-unsigned long int i;
-unsigned long int a = 0;
-unsigned long int b = 1;
-unsigned long int d;
-unsigned long int e;
-unsigned long int f;
-unsigned long int g;
-printf("%lu", a);
-for (i = 1; i < 91; i++)
+int count;
+unsigned long x = 0, y = 1 , z, a, b, c, d;
+for (count = 1; count <= 90; count++)
 {
-printf(", %lu", b);
-b += a;
-a = b - a;
+z = x + y;
+x = y;
+y = z;
+printf("%lu, ", z);
 }
-d = (a / 1);
-e = (a % 1);
-f = (b / 1);
-g = (b % 1);
-for (i = 92; i < 98; i++)
+a = x % 1000;
+x = x / 1000;
+b = y % 1000;
+y = y / 1000;
+while (count <= 98)
 {
-printf(", %lu", f + (g / 1));
-printf("%lu", g % 1);
-f = f + d;
-d = f - d;
-g = g + e;
-e = g - e;
+carry = (a + b) / 1000;
+c = (a + b) - d * 1000;
+z = (x + y) + d;
+x = y;
+y = z;
+a = b;
+b = c;
+if (c >= 100)
+{
+printf("%lu%lu", z, c);
 }
-printf("\n");
+else
+{
+printf("%lu0%lu", z, c);
+}
+if (count < 98)
+{
+printf(", ");
+}
+count++;
+}
+putchar('\n');
 return (0);
 }
