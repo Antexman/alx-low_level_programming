@@ -1,34 +1,24 @@
 #include <stdio.h>
 
 /**
- * main - Entry point
- *
- * Return: Always 0 (Success0
- */
+* main - Entry point
+*
+* Return: Always 0 (Success0
+*/
 
 int main(void)
 {
-int a, b;
-for (a = 0; a < 100; a++)
+int count;
+unsigned long x, y, z;
+x = 0;
+y = 1;
+for (count = 1; count <= 49; count++)
 {
-for (b = 0; b < 100; b++)
-{
-if (a < b)
-{
-putchar((a / 10) + 48);
-putchar((a % 10) + 48);
-putchar(' ');
-putchar((b / 10) + 48);
-putchar((b % 10) + 48);
-if (a != 98 || b != 99)
-{
-putchar(',');
-putchar(' ');
+z = x + y;
+x = y;
+y = z;
+printf("%lu, ", z);
 }
-}
-}
-}
-putchar('\n');
+printf("%lu\n", z + x);
 return (0);
 }
-
