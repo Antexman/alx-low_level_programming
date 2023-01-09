@@ -3,100 +3,66 @@
 #include "main.h"
 
 /**
- *strtow - splits a stirng into words
- *@str: string to be splitted
+ * _isspace - check if a character is whitespace
+ * @c: the character to check
  *
- *Return: pointer to the array of splitted words
+ * Return: 1 is c is a whitespace character, otherwise 0
  */
+int _isspace(int c)
+{
+	if (c == 0x20 || (c >= 0x09 && c <= 0x0d))
+		return (1);
+	return (0);
+}
 
+
+/**
+ * strtow - split a string into words
+ * @str: a pointer to the string to split
+ *
+ * Return: NULL if memory allocation fails or if str is NULL or empty (""),
+ * otherwise return a pointer to the array of words terminated by a NULL
+ */
 char **strtow(char *str)
 {
-char **split;
-int i, j = 0, temp = 0, size = 0, words = num_words(str);
+	char **words, *pos = str;
+	int w = 0, c;
 
-if (words == 0)
-return (NULL);
-split = (char **) malloc(sizeof(char *) * (words + 1));
-if (split != NULL)
-{
-for (i = 0; i <= len(str) && words; i++)
-{
-if ((str[i] != ' ') && (str[i] != '\0'))
-size++;
-else if (((str[i] == ' ') || (str[i] == '\0')) && i && (str[i - 1] != ' '))
-{
-split[j] = (char *) malloc(sizeof(char) * size + 1);
-if (split[j] != NULL)
-{
-while (temp < size)
-{
-split[j][temp] = str[(i - size) +temp];
-temp++;
-}
-split[j][temp] = '\0';
-size = temp = 0;
-j++;
-}
-else
-{
-while (j-- >= 0)
-free(split[j]);
-free(split);
-return (NULL);
-}
-}
-}
-split[words] = NULL;
-return (split);
-}
-else
-return (NULL);
-}
-
-/**
- * num_words - counts the number of words in str
- *@str: string to be used
- *
- *Return: number of words
- */
-int num_words(char *str)
-{
-int i = 0, words = 0;
-
-while (i <= len(str))
-{
-if ((str[i] != ' ') && (str[i] != '\0'))
-{
-i++;
-}
-else if (((str[i] == ' ') || (str[i] == '\0')) && i && (str[i - 1] != ' '))
-{
-words += 1;
-i++;
-}
-else
-{
-i++;
-}
-}
-return (words);
-}
-
-/**
- * len - returns length of str
- *@str: string to be counted
- *
- * Return: length of the string
- */
-
-int len(char *str)
-{
-int len = 0;
-
-if (str != NULL)
-{
-while (str[len])
-len++;
-}
-return (len);
+	if (!(str && *str))
+		return (NULL);
+	do {
+		while (_isspace(*pos))
+			++pos;
+		if (!*pos)
+			break;
+		while (*(++pos) && !_isspace(*pos))
+			;
+	} while (++w, *pos);
+	if (!w)
+		return (NULL);
+	words = (char **) malloc(sizeof(char *) * (w + 1));
+	if (!words)
+		return (NULL);
+	w = 0, pos = str;
+	do {
+		while (_isspace(*pos))
+			++pos;
+		if (!*pos)
+			break;
+		for (str = pos++; *pos && !_isspace(*pos); ++pos)
+			;
+		words[w] = (char *) malloc(sizeof(char) * (pos - str + 1));
+		if (!words[w])
+		{
+			while (w >  0)
+				free(words[--w]);
+			free(words);
+			return (NULL);
+		}
+		for (c = 0; str < pos; ++c, ++str)
+			words[w][c] = *str;
+		words[w][c] = '\0';
+	} while (++w, *pos);
+	words[w] = NULL;
+	return (words);
 }
