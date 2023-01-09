@@ -1,7 +1,6 @@
-#include "holberton.h"
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "main.h"
 /**
  * number - function to calculate number of words
  * @str: string being passed to check for words
