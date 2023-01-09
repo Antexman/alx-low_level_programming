@@ -20,7 +20,7 @@ if (ac == 0 || av == NULL)
 return (NULL);
 }
 while (ac--)
-i += (len(av[ac]) + 1);
+i += (mblen(av[ac]) + 1);
 s = (char *) malloc(i + 1);
 
 if (s != NULL)
@@ -32,6 +32,7 @@ s[p + j] = av[n][p];
 s[j + p] = '\n';
 j += (p + 1);
 n++;
+
 }
 s[j] = '\0';
 }
